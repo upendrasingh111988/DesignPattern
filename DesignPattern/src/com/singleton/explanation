@@ -1,0 +1,37 @@
+Singleton design pattern is that methodology or technique by which you returning same instance every time,
+ when you call get instance method.
+ for creating singleton class we have to create private constructor and static instance method
+  which returning instance of that class every time.
+  two type of singleton class one is lazy initialization and other is eager initialization, 
+  in eager initialization object is created at initial state but in lazy when method is calling.
+  it is used mostly for db connection or where you have required connection only one time.
+  
+  we can break singleton pattern by different way 
+  1::> by reflection api
+  		// for breaking singleton pattern through reflection api::
+		Constructor<LazzyIntializationSingletonPattern> declaredConstructor = LazzyIntializationSingletonPattern.class.getDeclaredConstructor();
+		declaredConstructor.setAccessible(true);
+		LazzyIntializationSingletonPattern newInstance = declaredConstructor.newInstance();
+		System.out.println(newInstance.hashCode());
+		
+how to prevent?
+for preventing of breaking singleton
+1>in constructor write condition
+if instance is already created then through run time exception exception like this
+
+private static LazzyIntializationSingletonPattern singleInstance;
+	
+	private LazzyIntializationSingletonPattern() {
+		if(singleInstance!=null) {
+			throw new RuntimeException("you are trying to break singleton class..");
+		}
+		
+	}
+2> by making enum in place of class
+
+second method for breaking singleton pattern 
+2::> by deserialization::
+for solving this we can use readResolve method
+3>third by breaking using clone
+for preventing deep oveeriding
+
