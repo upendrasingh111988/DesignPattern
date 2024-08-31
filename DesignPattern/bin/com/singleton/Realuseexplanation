@@ -1,0 +1,34 @@
+Singleton Class:
+
+The DatabaseConnectionManager class has a private constructor to prevent instantiation from outside the class.
+The class holds a static instance of itself, which is the single instance of the class.
+Double-Checked Locking:
+
+The getInstance() method checks if the instance is null. If it is, the method synchronizes on the class object to ensure that only one thread can create the instance.
+This is called double-checked locking and helps to avoid unnecessary synchronization once the instance is initialized.
+Database Connection:
+
+The class maintains a single database connection that can be accessed through the getConnection() method.
+This connection can be used across the application, ensuring efficient use of resources.
+Usage in a Project:
+
+Whenever a part of the application needs to interact with the database, it calls DatabaseConnectionManager.getInstance().getConnection() to get the connection.
+This approach ensures that all parts of the application use the same database connection, reducing overhead and managing resources efficiently.
+Real-World Scenario:
+In an enterprise web application, such as an online banking system, you might have various modules like account management, transactions, and customer support. All these modules require database access. Instead of creating separate database connections for each module, the DatabaseConnectionManager Singleton ensures that there is a single connection (or a pool of connections managed by one instance) that all modules share.
+
+This pattern is also commonly seen in:
+
+Logging classes, where a single logger instance is used throughout the application.
+Configuration managers, where application-wide configuration settings are managed by a single instance.
+Caches, where a single instance of a cache manager is used to store and retrieve frequently accessed data.
+
+
+
+
+
+
+
+
+
+
